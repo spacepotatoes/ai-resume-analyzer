@@ -19,7 +19,7 @@ useEffect(() => {
 
   return (
     <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center">
-      <div className="gradient-border shadow-lg margin-auto">
+      <div className="gradient-border shadow-lg mx-auto">
         <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
           <div className="flex flex-col items-center gap-2 text-center">
             <h1>Welcome</h1>
