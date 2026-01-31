@@ -24,6 +24,8 @@ useEffect(() => {
           <div className="flex flex-col items-center gap-2 text-center">
             <h1>Welcome</h1>
             <h2>Log In To Continue Your Job Journey</h2>
+            <p>You can login into puter and create a free account. It just takes a second!</p>
+            <p>Puter.com is an open-source, browser-based "internet operating system" (Web OS) that gives you a full desktop-like experience with files, apps, games, and personal cloud storage — all running entirely in your browser, with strong privacy focus and the option to self-host it.</p>
           </div>
           <div>
             {isLoading ? (
