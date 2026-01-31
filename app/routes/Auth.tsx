@@ -3,56 +3,83 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 export const meta = () => [
-  { title: 'Resumind | Auth' },
-  { name: 'description', content: 'Log into your account' },
+  { title: "Resumind | Auth" },
+  { name: "description", content: "Log into your account" },
 ];
 
 const Auth = () => {
-const { isLoading, auth } = usePuterStore();
-const location = useLocation();
-const next = location.search.split('next=')[1];
-const navigate = useNavigate();
+  const { isLoading, auth } = usePuterStore();
+  const location = useLocation();
+  const next = location.search.split("next=")[1];
+  const navigate = useNavigate();
 
-useEffect(() => {
-  if(auth.isAuthenticated) navigate (next);
-}, [auth.isAuthenticated, next])
+  useEffect(() => {
+    if (auth.isAuthenticated) navigate(next);
+  }, [auth.isAuthenticated, next, navigate]);
 
   return (
-    <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center">
-      <div className="gradient-border shadow-lg mx-auto">
-        <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <h1>Welcome</h1>
-            <h2>Log In To Continue Your Job Journey</h2>
-            <p>You can login into puter and create a free account. It just takes a second!</p>
-            <p>Puter.com is an open-source, browser-based "internet operating system" (Web OS) that gives you</p>
-              <p>a full desktop-like experience with files, apps, games, and personal cloud storage</p>
-            <p> — all running entirely in your browser, with strong privacy focus and the option to self-host it.</p>
+    <main
+      className="
+        bg-[url('/images/bg-auth.svg')] bg-cover 
+        min-h-screen 
+        flex items-center justify-center p-6
+      "
+    >
+      <div
+        className="
+          gradient-border shadow-lg w-full 
+          max-w-lg          /* ← wichtig: maximale Breite */
+        "
+      >
+        <section
+          className="
+            flex flex-col items-center gap-8 
+            bg-white rounded-2xl p-8 sm:p-10
+            text-center
+          "
+        >
+          <div className="space-y-4 max-w-prose">
+            {/* max-w-prose ≈ 65ch → sehr angenehme Leselänge */}
+            <h1 className="text-3xl font-bold">Welcome</h1>
+            <h2 className="text-xl font-semibold text-gray-700">
+              Log In To Continue Your Job Journey
+            </h2>
+            <p className="text-gray-600">
+              You can log in with Puter and create a free account. It just takes a second!
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Puter.com is an open-source, browser-based "internet operating system" (Web OS) 
+              that gives you a full desktop-like experience with files, apps, games, 
+              and personal cloud storage — all running entirely in your browser, 
+              with strong privacy focus and the option to self-host it.
+            </p>
           </div>
-          <div>
+
+          <div className="w-full max-w-xs">
             {isLoading ? (
-              <button className="auth-button animate-pulse">
-                <p>Signing you in...</p>
+              <button className="auth-button animate-pulse w-full py-3">
+                Signing you in...
+              </button>
+            ) : auth.isAuthenticated ? (
+              <button
+                className="auth-button w-full py-3"
+                onClick={auth.signOut}
+              >
+                Log Out
               </button>
             ) : (
-              <>
-                {auth.isAuthenticated ? (
-                  <button className="auth-button" onClick={auth.signOut}>
-                    <p>Log Out</p>
-                  </button>
-                ) : (
-                  <button className="auth-button" onClick={auth.signIn}>
-                    <p>Log In</p>
-                  </button>
-                
-                )}
-              </>
+              <button
+                className="auth-button w-full py-3"
+                onClick={auth.signIn}
+              >
+                Log In with Puter
+              </button>
             )}
           </div>
         </section>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;
